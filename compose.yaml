@@ -1,0 +1,17 @@
+services:
+  backend:
+    image: node:19
+    volumes:
+      - ./backend:/usr/src/app
+    ports:
+      - "84:9000"
+    command: sh -c "
+      chmod +x /usr/src/app/startup.sh &&
+      /usr/src/app/startup.sh"
+
+  frontend:
+    image: nginx
+    volumes:
+      - ./frontend/build:/usr/share/nginx/html:ro
+    ports:
+      - "85:80"
